@@ -1,0 +1,127 @@
+@import "tailwindcss";
+
+:root {
+  /* Paleta Luma — oliva, creme, amarelo manteiga e marrom conforto */
+  --mint: #6B8E23;         /* Verde Oliva — identidade primária */
+  --mint-dark: #556B2F;    /* Oliva escuro — hover/ênfase */
+  --mint-light: #A5B97B;   /* Oliva suave — realces e foco */
+  --mint-tint: #E6EED3;    /* Oliva bem clara — fundos de ícone/chip */
+  --off-white: #FAF8F5;    /* Fundo geral, nunca branco puro */
+  --graphite: #2C1E18;     /* Texto principal / superfícies escuras */
+  --graphite-soft: #3E2723;/* Texto secundário forte */
+  --slate-muted: #7B6A5D;  /* Texto auxiliar */
+  --soft-orange: #D97706;  /* Avisos de limite de gastos */
+  --soft-orange-tint: #F4E0A5; /* Fundo de avisos */
+
+  --background: var(--off-white);
+  --surface: #FFFCF7;
+  --primary: var(--mint);
+  --primary-2: var(--mint-dark);
+  --accent: var(--mint-light);
+  --muted: var(--slate-muted);
+  --border: #E7DDD2;
+  --danger: #DC2626;
+  --warning: var(--soft-orange);
+
+  --glass-bg: rgba(255, 252, 247, 0.68);
+  --glass-bg-strong: rgba(255, 252, 247, 0.86);
+  --glass-border: rgba(239, 235, 228, 0.92);
+  --glass-shadow: 0 8px 32px rgba(107, 142, 35, 0.14);
+
+  --font-luma: var(--font-jakarta), "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display",
+    "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { background: var(--background); }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--background);
+  background-image:
+    radial-gradient(1200px 600px at 100% -10%, rgba(107, 142, 35, 0.18), transparent 60%),
+    radial-gradient(900px 500px at -10% 20%, rgba(244, 224, 165, 0.46), transparent 55%);
+  background-attachment: fixed;
+  color: #2C1E18;
+  font-family: var(--font-luma);
+  font-feature-settings: "tnum" 1, "cv05" 1;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, .tabular-nums-lg { font-variant-numeric: tabular-nums; }
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; }
+
+/* ---------- Liquid glass ---------- */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.glass-strong {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.glass-dark {
+  background: linear-gradient(160deg, rgba(107, 142, 35, 0.95), rgba(85, 107, 47, 0.95));
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 12px 30px rgba(62, 39, 35, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.glass-nav {
+  background: rgba(250, 248, 245, 0.86);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* ---------- Campos de formulário (vidro, sem estilo padrão de navegador) ---------- */
+.field {
+  background: rgba(255, 252, 247, 0.7);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border: 1px solid rgba(231, 221, 210, 0.95);
+  box-shadow: inset 0 1px 2px rgba(107, 142, 35, 0.08);
+  color: #2C1E18;
+  appearance: none;
+  -webkit-appearance: none;
+  color-scheme: light;
+}
+.field::placeholder { color: #A08E82; }
+.field:focus {
+  background: rgba(255, 252, 247, 0.92);
+  border-color: #A5B97B;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(107, 142, 35, 0.22);
+}
+select.field option { color: #2C1E18; background: #FAF8F5; }
+
+/* Ícone do calendário nativo: some visualmente mas continua clicável; usamos um ícone próprio por cima. */
+.field-date::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  cursor: pointer;
+}
+.field-date::-webkit-inner-spin-button { display: none; }
+
+
+/* ---------- Celular: cartões planos e leves (sem desfoque, sombra suave) ---------- */
+@media (max-width: 639px) {
+  .glass, .glass-strong {
+    background: #FFFCF7;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: 0 1px 3px rgba(44, 30, 24, 0.06);
+    border-radius: 1.25rem;
+  }
+  .field { backdrop-filter: none; -webkit-backdrop-filter: none; }
+  /* 16px evita o zoom automático do iOS ao focar um campo */
+  input, select, textarea { font-size: 16px; }
+}
